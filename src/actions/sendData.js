@@ -1,21 +1,18 @@
 import {
-  SEND_DATA_REQUEST,
   FETCH_DATA_REQUEST,
   REQUESTED_DATA_SECCESS,
   REQUESTED_DATA_ERROR,
 } from '../constants/actionTypes';
 
-export const sendData = () => ({
-  type: SEND_DATA_REQUEST,
-});
-export const fetchData = () => ({
+export const doAddfetchData = () => ({
   type: FETCH_DATA_REQUEST,
 });
 
-export const requestDataSuccess = data => ({
+export const doAddRequestDataSuccess = data => ({
   type: REQUESTED_DATA_SECCESS,
-  message: data.message,
+  data,
 });
-export const requestDataError = () => ({
+export const doAddRequestDataError = data => ({
   type: REQUESTED_DATA_ERROR,
+  data,
 });

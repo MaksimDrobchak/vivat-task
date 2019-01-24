@@ -1,43 +1,29 @@
-import { delay } from 'redux-saga';
-import { put, takeEvery, all, call } from 'redux-saga/effects';
-import { sendData, requestDataSuccess, requestDataError } from '../actions';
-import axios from 'axios';
+import { put, takeEvery, all, delay } from 'redux-saga/effects';
+import { doAddRequestDataSuccess, doAddRequestDataError } from '../actions';
+
 import { FETCH_DATA_REQUEST } from '../constants/actionTypes';
+import axios from 'axios';
 
-function* watchSendData (){
-  yield takeEvery(FETCH_DATA_REQUEST, sendDataAsync);
+function* requestFetchData (){
+  let data;
+  axios
+    .get('http://www.mocky.io/v2/5c48e56432000068000b5653', {
+      method: 'GET',
+      dataType: 'json',
+    })
+    .then(res => (data = res.data));
+
+  const randomNumber = Math.round(Math.random() * 3);
+
+  yield delay(3000);
+  if (randomNumber % 2 === 1) yield put(doAddRequestDataSuccess(data));
+  if (randomNumber % 2 === 0) yield put(doAddRequestDataError(data));
 }
 
-function* sendDataAsync (){
-  const payload = {
-    name: sessionStorage.getItem('name'),
-    description: sessionStorage.getItem('description'),
-    date: sessionStorage.getItem('date'),
-    image: sessionStorage.getItem('image'),
-  };
-  console.log({ ...payload });
-  try {
-    yield call(delay, 2000);
-    yield put(sendData());
-    yield call(delay, 2000);
-    const data = yield call(() => {
-      return axios({
-        url: 'http://www.mocky.io/v2/5c47d27731000029008a1ec9',
-        method: 'POST',
-        crossDomain: true,
-
-        data: payload,
-        dataType: 'json',
-      }).then(res => {
-        console.log(res.data);
-        return res.data;
-      });
-    });
-    yield put(requestDataSuccess(data.message));
-  } catch (error) {
-    yield put(requestDataError());
-  }
+function* watchFetchData (){
+  yield takeEvery(FETCH_DATA_REQUEST, requestFetchData);
 }
+
 export default function* rootSaga (){
-  yield all([ watchSendData() ]);
+  yield all([ watchFetchData() ]);
 }

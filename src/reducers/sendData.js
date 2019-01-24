@@ -1,34 +1,34 @@
 import {
-  SEND_DATA_REQUEST,
   REQUESTED_DATA_SECCESS,
   REQUESTED_DATA_ERROR,
+  FETCH_DATA_REQUEST,
 } from '../constants/actionTypes';
 
 const initialState = {
-  url: '',
+  success: '',
+  error: '',
   loading: false,
-  error: false,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case SEND_DATA_REQUEST:
+    case FETCH_DATA_REQUEST:
       return {
-        url: '',
+        ...state,
         loading: true,
-        error: false,
       };
+
     case REQUESTED_DATA_SECCESS:
       return {
-        url: action.url,
+        ...state,
         loading: false,
-        error: false,
+        success: action.data.success,
       };
     case REQUESTED_DATA_ERROR:
       return {
-        url: '',
+        ...state,
         loading: false,
-        error: true,
+        error: action.data.error,
       };
     default:
       return state;

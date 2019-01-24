@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
-import { doAddBackStep, doAddNextStep, doAddResetStep } from '../../../actions';
 
 import ActionsContainer from './ActionsContainer';
 import CompletedSteps from './CompletedSteps';
@@ -11,7 +10,7 @@ import SecondStep from './SecondStep';
 import LastStep from './LastStep';
 
 import withStepsComponent from './withStepsComponent';
-
+import { doAddResetStep } from '../../../actions';
 import {
   Stepper,
   Step,
@@ -33,13 +32,7 @@ function getStepContent (step){
   }
 }
 
-const ExtensionPanel = ({
-  onAddNextStep,
-  onAddBackStep,
-  onAddResetStep,
-  activeStep,
-  steps,
-}) => (
+const ExtensionPanel = ({ onAddResetStep, activeStep, steps, isDisible }) => (
   <div style={{ width: 600 }}>
     <Stepper activeStep={activeStep} orientation='vertical'>
       {steps.map((label, index) => (
@@ -49,8 +42,7 @@ const ExtensionPanel = ({
             <Typography variant='h5'>{getStepContent(index)}</Typography>
             <ActionsContainer
               activeStep={activeStep}
-              onAddBackStep={onAddBackStep}
-              onAddNextStep={onAddNextStep}
+              isDisible={isDisible}
               length={steps.length}
             />
           </StepContent>
@@ -66,12 +58,9 @@ const ExtensionPanel = ({
 const WithExtensionPanel = withStepsComponent(ExtensionPanel);
 
 const mapStateToProps = state => ({
-  activeStep: state.activeStepState,
+  activeStep: state.activeStepState.activeStep,
 });
-
 const mapDispatchToProps = dispatch => ({
-  onAddNextStep: () => dispatch(doAddNextStep()),
-  onAddBackStep: () => dispatch(doAddBackStep()),
   onAddResetStep: () => dispatch(doAddResetStep()),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(WithExtensionPanel);

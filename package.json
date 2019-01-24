@@ -6,7 +6,7 @@
   "author": "Maxim Drobchak <drobchak1988@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --config ./webpack.config.js --mode development",
+    "start": "webpack-dev-server --host 127.0.0.1 --port 3000 --config ./webpack.config.js --mode development",
     "build": "webpack",
     "build-prod": "webpack -p"
   },
@@ -21,15 +21,12 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "date-fns": "2.0.0-alpha.25",
+    "react-hot-loader": "^4.3.11",
     "file-loader": "^3.0.1",
-    "formik": "^1.4.2",
+
     "html-webpack-plugin": "^3.2.0",
     "image-webpack-loader": "^4.6.0",
-    "react-dates": "^18.4.0",
-    "react-dnd": "^7.0.2",
-    "react-dnd-html5-backend": "^7.0.2",
-    "react-hot-loader": "^4.3.11",
+
     "regenerator-runtime": "^0.13.1",
     "webpack": "^4.23.1",
     "webpack-cli": "^3.1.2",
@@ -42,6 +39,8 @@
     "@material-ui/icons": "^3.0.2",
     "axios": "^0.18.0",
     "jss": "^9.8.7",
+    "date-fns": "2.0.0-alpha.25",
+    "formik": "^1.4.2",
     "material-ui-pickers": "^2.1.1",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
@@ -50,6 +49,10 @@
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
-    "redux-saga": "^1.0.0"
+    "redux-saga": "^1.0.0",
+    "react-dates": "^18.4.0",
+    "react-dnd": "^7.0.2",
+    "react-dnd-html5-backend": "^7.0.2"
+
   }
 }

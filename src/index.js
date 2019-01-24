@@ -21,6 +21,7 @@ const theme = createMuiTheme({
     useNextVariants: true,
   },
 });
+
 ReactDOM.render(
   <Provider store={store}>
     <MuiThemeProvider theme={theme}>
@@ -32,4 +33,4 @@ ReactDOM.render(
   document.getElementById('app'),
 );
 
-module.hot.accept();
+ module.hot.accept();

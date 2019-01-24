@@ -8,7 +8,7 @@ export default () => (
   <AppBar position='static'>
     <Toolbar>
       <Typography variant='h5' color='inherit'>
-        Test task App
+        Test task
       </Typography>
     </Toolbar>
   </AppBar>

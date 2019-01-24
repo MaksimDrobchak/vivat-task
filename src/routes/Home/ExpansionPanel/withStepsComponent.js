@@ -1,25 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
-function getSessionItem (string){
-  if (
-    sessionStorage.getItem(`${string}`) !== '' &&
-    sessionStorage.getItem(`${string}`) !== undefined &&
-    sessionStorage.getItem(`${string}`) !== null
-  ) {
-    return sessionStorage.getItem(`${string}`).toString();
-  }
-  return '';
-}
-
-const withStepComponent = Component => {
+const withStepComponent = Component =>
   class WithStepComponent extends React.Component {
     constructor (props) {
       super(props);
 
       this.state = {
-        step1: 'Step 1',
-        step2: 'Step 2',
+        step1: 'Step 1 ',
+        step2: 'Step 2 ',
         step3: 'Step 3',
       };
 
@@ -34,7 +22,7 @@ const withStepComponent = Component => {
         return true;
       }
 
-      if (this.props.activeStepState !== nextProps.activeStepState) {
+      if (this.props.activeStep !== nextProps.activeStep) {
         return true;
       }
 
@@ -50,13 +38,20 @@ const withStepComponent = Component => {
     }
 
     listener () {
-      const name = getSessionItem('name');
-      const date = getSessionItem('date');
-
+      const name = window.sessionStorage.getItem('name');
+      const date = window.sessionStorage.getItem('date');
       this.setState({
-        step1: 'Step 1 ' + ' ' + name,
+        step1:
+
+            name === null ? 'Step 1 ' :
+            'Step 1 ' + name,
       });
-      this.setState({ step2: 'Step 2 ' + ' ' + date });
+      this.setState({
+        step2:
+
+            date === null ? 'Step 2 ' :
+            'Step 2 ' + date,
+      });
     }
 
     render () {
@@ -64,11 +59,6 @@ const withStepComponent = Component => {
 
       return <Component steps={steps} {...this.props} />;
     }
-  }
-  const mapStateToProps = state => ({
-    activeStepState: state.activeStepState,
-  });
+  };
 
-  return connect(mapStateToProps)(WithStepComponent);
-};
 export default withStepComponent;

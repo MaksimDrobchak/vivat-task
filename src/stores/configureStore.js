@@ -11,7 +11,7 @@ const logger = createLogger();
 const store = createStore(
   rootReducer,
   undefined,
-  applyMiddleware(logger, sagaMiddleware),
+  applyMiddleware(sagaMiddleware, logger),
 );
 sagaMiddleware.run(rootSaga);
 

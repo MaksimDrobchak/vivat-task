@@ -1,8 +1,6 @@
 import React, { PureComponent } from 'react';
 import DateFnsUtils from '@date-io/date-fns';
-import { MuiPickersUtilsProvider } from 'material-ui-pickers';
-
-import { DatePicker } from 'material-ui-pickers';
+import { MuiPickersUtilsProvider, DatePicker } from 'material-ui-pickers';
 
 export default class App extends PureComponent {
   constructor (props) {
@@ -16,12 +14,11 @@ export default class App extends PureComponent {
 
   handleDateChange (date) {
     this.setState({ selectedDate: date });
-    sessionStorage.setItem('date', date);
   }
 
   render () {
     const { selectedDate } = this.state;
-
+    window.sessionStorage.setItem('date', this.state.selectedDate);
     return (
       <div>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>

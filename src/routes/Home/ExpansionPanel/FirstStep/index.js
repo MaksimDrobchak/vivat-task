@@ -13,25 +13,18 @@ class FirstStep extends Component {
       description: '',
     };
 
-    this.onChange = this.onChange.bind(this);
+    this.onChangeName = this.onChangeName.bind(this);
+    this.onChangeDescription = this.onChangeDescription.bind(this);
   }
 
-  onChange (e) {
-    this.setState({ [e.target.name]: e.target.value });
-
-    if ([ e.target.name ] == 'name') {
-      sessionStorage.setItem('name', this.state.name);
-    }
-    else if ([ e.target.name ] == 'description') {
-      sessionStorage.setItem('description', this.state.description);
-    }
-
-    console.log(
-      `name: ${sessionStorage.getItem('name')
-        .length} \n description: ${sessionStorage.getItem('description')}`,
-    );
+  onChangeName (e) {
+    this.setState({ name: e.target.value });
+    window.sessionStorage.setItem('name', this.state.name);
   }
-
+  onChangeDescription (e) {
+    this.setState({ description: e.target.value });
+    window.sessionStorage.setItem('description', this.state.description);
+  }
   render () {
     const { name, description } = this.state;
     const { classes } = this.props;
@@ -40,8 +33,7 @@ class FirstStep extends Component {
         <Input
           placeholder='Name:'
           type='text'
-          onChange={this.onChange}
-          name='name'
+          onChange={e => this.onChangeName(e)}
           value={name}
           className={classes.input}
         />
@@ -49,8 +41,7 @@ class FirstStep extends Component {
         <textarea
           cols={25}
           rows={10}
-          onChange={this.onChange}
-          name='description'
+          onChange={e => this.onChangeDescription(e)}
           value={description}
           placeholder='Description:'
           className={classes.textarea}

@@ -4,8 +4,9 @@ import {
   SET_NEXT_STEP,
 } from '../constants/actionTypes';
 
-export const doAddNextStep = () => ({
+export const doAddNextStep = payload => ({
   type: SET_NEXT_STEP,
+  payload,
 });
 export const doAddBackStep = () => ({
   type: SET_BACK_STEP,

@@ -1,17 +1,15 @@
 import { doAddNextStep, doAddBackStep, doAddResetStep } from './steps';
 import {
-  sendData,
-  requestDataSuccess,
-  requestDataError,
-  fetchData,
+  doAddRequestDataSuccess,
+  doAddRequestDataError,
+  doAddfetchData,
 } from './sendData';
 
 export {
   doAddNextStep,
   doAddBackStep,
   doAddResetStep,
-  sendData,
-  requestDataSuccess,
-  requestDataError,
-  fetchData,
+  doAddRequestDataSuccess,
+  doAddRequestDataError,
+  doAddfetchData,
 };

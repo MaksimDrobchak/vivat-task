@@ -13,6 +13,7 @@ import img1 from './img/download.png';
 import img2 from './img/download1.png';
 import img3 from './img/download2.png';
 import img4 from './img/download3.png';
+
 class AppDragDrop extends Component {
   constructor (props) {
     super(props);
@@ -82,17 +83,16 @@ class AppDragDrop extends Component {
 
         axios({
           method: 'get',
-          url: location.toString() + image.src,
+          url: image.src,
           responseType: 'blob',
         }).then(response => {
           const reader = new FileReader();
           reader.readAsDataURL(response.data);
           reader.onloadend = () => {
             const base64data = reader.result;
-            sessionStorage.setItem('image', base64data);
+            window.sessionStorage.setItem('image', base64data);
           };
         });
-        setTimeout(console.log(sessionStorage.getItem('image')), 0);
       }
       return image;
     });
